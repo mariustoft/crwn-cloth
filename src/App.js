@@ -4,7 +4,7 @@ import HomePage from "./components/homepage";
 
 const App = () => (
   <div>
-    {/* <p>Hello World from the main app</p> */}
+    <p>Hello World from the main app</p>
     <HomePage />
   </div>
 );
