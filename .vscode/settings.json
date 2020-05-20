@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/da486718-70b0-4f98-aa53-373cf56dee04/resourceGroups/crwn-cloth/providers/Microsoft.Web/sites/crwn-cloth",
+    "appService.deploySubpath": ""
+}
