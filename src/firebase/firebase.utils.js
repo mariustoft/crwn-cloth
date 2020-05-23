@@ -15,6 +15,17 @@ firebase.initializeApp({
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+export const createUserProfileDocument = async (userAuth, aditionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+  console.log(snapShot);
+
+  if (!snapShot.exists) {
+  }
+};
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({ prompt: "select_account" });
