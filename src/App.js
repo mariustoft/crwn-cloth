@@ -6,7 +6,7 @@ import ShopPage from "./pages/shop/shop";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
 import Header from "./components/header/header";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, firestore } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   constructor() {
@@ -16,16 +16,31 @@ class App extends React.Component {
     };
   }
 
-  unsubscribeFromAuth = null;
-
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      createUserProfileDocument(user);
-    });
-  }
+    auth.onAuthStateChanged(async (userAuthNow, aditionalData) => {
+      if (!userAuthNow) return;
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+      const userRef = firestore.doc(`users/${userAuthNow.uid}`);
+      const snapShot = await userRef.get();
+
+      this.setState({ currentUser: userAuthNow });
+
+      if (!snapShot.exists) {
+        const { displayName, email } = userAuthNow;
+        const createdAt = new Date();
+
+        try {
+          await userRef.set({
+            displayName,
+            email,
+            createdAt,
+            ...aditionalData,
+          });
+        } catch (error) {
+          console.log("Error creating user" + error.name);
+        }
+      }
+    });
   }
 
   render() {

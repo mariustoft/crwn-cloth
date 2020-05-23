@@ -4,7 +4,7 @@ import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./sign-in.scss";
 
-import Nene from "../form-input/form-input";
+import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
 
 class SignIn extends React.Component {
@@ -31,7 +31,7 @@ class SignIn extends React.Component {
         <span>Sign In with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
-          <Nene
+          <FormInput
             handleChange={this.handleChange}
             name="email"
             type="email"
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
             label="email"
             required
           />
-          <Nene
+          <FormInput
             handleChange={this.handleChange}
             name="password"
             type="password"
