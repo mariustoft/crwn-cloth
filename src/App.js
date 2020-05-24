@@ -6,7 +6,7 @@ import ShopPage from "./pages/shop/shop";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
 import Header from "./components/header/header";
 
-import { auth, firestore } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   constructor() {
@@ -16,31 +16,30 @@ class App extends React.Component {
     };
   }
 
+  unsubscribeFromAuth = null;
+
   componentDidMount() {
-    auth.onAuthStateChanged(async (userAuthNow, aditionalData) => {
-      if (!userAuthNow) return;
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      const userRef = firestore.doc(`users/${userAuthNow.uid}`);
-      const snapShot = await userRef.get();
-
-      this.setState({ currentUser: userAuthNow });
-
-      if (!snapShot.exists) {
-        const { displayName, email } = userAuthNow;
-        const createdAt = new Date();
-
-        try {
-          await userRef.set({
-            displayName,
-            email,
-            createdAt,
-            ...aditionalData,
+        userRef.onSnapshot((snapshot) => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
           });
-        } catch (error) {
-          console.log("Error creating user" + error.name);
-        }
+          console.log(this.state);
+        });
       }
+
+      this.setState({ currentUser: userAuth });
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   render() {

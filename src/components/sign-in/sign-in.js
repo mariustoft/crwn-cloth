@@ -15,22 +15,22 @@ class SignIn extends React.Component {
       password: "",
     };
   }
-
   handleSubmit = (e) => {
     e.preventDefault();
   };
-
+  
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this)
   };
-
+  
   render() {
     return (
       <div className="sign-in">
         <h2>I already have and account</h2>
         <span>Sign In with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
+        <form className='sign-in-form' onSubmit={this.handleSubmit}>
           <FormInput
             handleChange={this.handleChange}
             name="email"
