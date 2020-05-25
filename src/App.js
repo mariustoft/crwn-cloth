@@ -8,7 +8,8 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import Header from "./components/header/header";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { setCurrentUser } from "./redux/user.actions";
+
+import { setCurrentUser } from "./redux/user-reducer/user.actions";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
