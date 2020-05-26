@@ -1,21 +1,30 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+
+import CustomButton from "../custom-button/custom-button";
 
 import "./collection-item.scss";
+import { connect } from "react-redux";
 
-const CollectionItem = ({ id, name, imageUrl, price }) => (
+export default connect(null, (dispatch) => ({
+  addItem: (item) =>
+    dispatch({
+      type: "ADD_ITEM",
+      payload: item,
+    }),
+}))(({ item, addItem }) => (
   <div className="collection-item">
     <div
       className="image"
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(${item.imageUrl})`,
       }}
     />
+    <CustomButton onClick={() => addItem(item)} inverted>
+      Add to cart
+    </CustomButton>
     <div className="collection-footer">
-      <span className="name">{name}</span>
-      <span className="price">{price}</span>
+      <span className="name">{item.name}</span>
+      <span className="price">{item.price}</span>
     </div>
   </div>
-);
-
-export default withRouter(CollectionItem);
+));

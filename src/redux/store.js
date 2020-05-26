@@ -1,6 +1,25 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 
+const addItemToCart = (cartItems, cartItemToAdd) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToAdd.id
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.id
+        ? {
+            ...cartItem,
+            quantity: cartItem.quantity + 1,
+          }
+        : cartItem
+    );
+  }
+
+  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+};
+
 export default createStore(
   combineReducers({
     user: (
@@ -8,23 +27,39 @@ export default createStore(
         currentUser: null,
       },
       action
-    ) =>
-      action.type === "SET_CURRENT_USER"
-        ? {
+    ) => {
+      switch (action.type) {
+        case "SET_CURRENT_USER":
+          return {
+            ...state,
             currentUser: action.payload,
-          }
-        : state,
+          };
+        default:
+          return state;
+      }
+    },
     cart: (
       state = {
         hidden: true,
+        cartItems: [],
       },
       action
-    ) =>
-      action.type === "TOGGLE_CART_HIDDEN"
-        ? {
+    ) => {
+      switch (action.type) {
+        case "TOGGLE_CART_HIDDEN":
+          return {
+            ...state,
             hidden: !state.hidden,
-          }
-        : state,
+          };
+        case "ADD_ITEM":
+          return {
+            ...state,
+            cartItems: addItemToCart(state.cartItems, action.payload),
+          };
+        default:
+          return state;
+      }
+    },
   }),
   applyMiddleware(...[logger])
 );

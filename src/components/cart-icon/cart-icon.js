@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import "./cart-icon.scss";
 
 export default connect(
-  ({ user: { currentUser }, cart: { hidden } }) => ({
+  ({ user: { currentUser }, cart: { hidden, cartItems } }) => ({
     currentUser,
     hidden,
+    cartItems: cartItems,
   }),
   (dispatch) => ({
     toggleCartHidden: () =>
@@ -14,9 +15,9 @@ export default connect(
         type: "TOGGLE_CART_HIDDEN",
       }),
   })
-)(({ currentUser, hidden, toggleCartHidden }) => (
+)(({ cartItems, currentUser, toggleCartHidden }) => (
   <div className="cart-icon">
     <ShoppingIcon className="shopping-icon" onClick={toggleCartHidden} />
-    <span className="item-count">{hidden && currentUser && "1"}</span>
+    <span className="item-count">{currentUser && cartItems.length}</span>
   </div>
 ));
