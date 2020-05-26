@@ -11,7 +11,10 @@ import CartDropdown from "../cart-dropdown/cart-dropdown";
 
 import "./header.scss";
 
-const Header = ({ currentUser, hidden }) => (
+export default connect(({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
+}))(({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo"></Logo>
@@ -23,7 +26,6 @@ const Header = ({ currentUser, hidden }) => (
       <Link className="option" to="/contact">
         CONTACT
       </Link>
-
       {currentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
@@ -37,11 +39,4 @@ const Header = ({ currentUser, hidden }) => (
     </div>
     {!hidden && <CartDropdown />}
   </div>
-);
-
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
-});
-
-export default connect(mapStateToProps)(Header);
+));

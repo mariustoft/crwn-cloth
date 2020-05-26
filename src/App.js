@@ -9,7 +9,10 @@ import Header from "./components/header/header";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
-import { setCurrentUser } from "./redux/user-reducer/user.actions";
+export const setCurrentUser = (user) => ({
+  type: "SET_CURRENT_USER",
+  payload: user,
+});
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
