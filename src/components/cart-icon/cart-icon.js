@@ -9,12 +9,16 @@ export default connect(
     hidden,
     cartItems: cartItems,
   }),
-  (dispatch) => ({
+
+
+  (d) => ({
     toggleCartHidden: () =>
-      dispatch({
+      d({
         type: "TOGGLE_CART_HIDDEN",
       }),
   })
+
+  
 )(({ cartItems, currentUser, toggleCartHidden }) => (
   <div className="cart-icon">
     <ShoppingIcon className="shopping-icon" onClick={toggleCartHidden} />
