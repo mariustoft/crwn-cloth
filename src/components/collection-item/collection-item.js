@@ -6,12 +6,12 @@ import "./collection-item.scss";
 import { connect } from "react-redux";
 
 export default connect(null, (dispatch) => ({
-  addItem: (item) =>
+  addItemToCart: (item) =>
     dispatch({
       type: "ADD_ITEM",
       payload: item,
     }),
-}))(({ item, addItem }) => (
+}))(({ addItemToCart, ...item }) => (
   <div className="collection-item">
     <div
       className="image"
@@ -19,7 +19,7 @@ export default connect(null, (dispatch) => ({
         backgroundImage: `url(${item.imageUrl})`,
       }}
     />
-    <CustomButton onClick={() => addItem(item)} inverted>
+    <CustomButton onClick={() => addItemToCart(item)} inverted>
       Add to cart
     </CustomButton>
     <div className="collection-footer">

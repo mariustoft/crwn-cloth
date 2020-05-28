@@ -3,21 +3,22 @@ import logger from "redux-logger";
 
 const addItemToCart = (existingCartItems, cartItemToAdd) => {
   const existingCartItem = existingCartItems.find(
-    (cartItem) => cartItem.id === cartItemToAdd.id
+    (existingCartItem) => existingCartItem.id === cartItemToAdd.id
   );
 
+
   if (existingCartItem) {
-    return existingCartItems.map((cartItem) =>
-      cartItem.id
+    return existingCartItems.map((existingCartItem) =>
+      existingCartItem.id
         ? {
-            ...cartItem,
-            quantity: cartItem.quantity + 1,
+            ...existingCartItem,
+            quantity: existingCartItem.quantity + 1,
           }
-        : cartItem
+        : existingCartItem
     );
   }
 
-  return [ { ...cartItemToAdd, quantity: 1 }, ...existingCartItems];
+  return [{ ...cartItemToAdd, quantity: 1 }, ...existingCartItems];
 };
 
 export default createStore(

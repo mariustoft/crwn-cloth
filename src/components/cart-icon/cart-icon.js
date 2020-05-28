@@ -3,25 +3,21 @@ import React from "react";
 import { connect } from "react-redux";
 import "./cart-icon.scss";
 
+import { selectCartItemsCount } from "../../redux/selectors";
+
 export default connect(
-  ({ user: { currentUser }, cart: { hidden, cartItems } }) => ({
-    currentUser,
-    hidden,
-    cartItems: cartItems,
+  (state) => ({
+    nrItems: selectCartItemsCount(state),
   }),
-
-
-  (d) => ({
+  (dispatch) => ({
     toggleCartHidden: () =>
-      d({
+      dispatch({
         type: "TOGGLE_CART_HIDDEN",
       }),
   })
-
-  
-)(({ cartItems, currentUser, toggleCartHidden }) => (
+)(({ nrItems, toggleCartHidden }) => (
   <div className="cart-icon">
     <ShoppingIcon className="shopping-icon" onClick={toggleCartHidden} />
-    <span className="item-count">{currentUser && cartItems.length}</span>
+    <span className="item-count">{nrItems}</span>
   </div>
 ));
