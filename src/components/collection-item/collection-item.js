@@ -2,8 +2,10 @@ import React from "react";
 
 import CustomButton from "../custom-button/custom-button";
 
-import "./collection-item.scss";
 import { connect } from "react-redux";
+// import { createStructuredSelector } from "reselect";
+
+import "./collection-item.scss";
 
 export default connect(null, (dispatch) => ({
   addItemToCart: (item) =>

@@ -1,20 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-
 import CartIcon from "../cart-icon/cart-icon.js";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { isCartHidden, selectCurrentUser } from "../../redux/selectors";
+
 import "./header.scss";
 
-export default connect(({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
-}))(({ currentUser, hidden }) => (
+export default connect(
+  createStructuredSelector({
+    selectCurrentUser,
+    isCartHidden,
+  })
+)(({ selectCurrentUser, isCartHidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo"></Logo>
@@ -26,7 +30,7 @@ export default connect(({ user: { currentUser }, cart: { hidden } }) => ({
       <Link className="option" to="/contact">
         CONTACT
       </Link>
-      {currentUser ? (
+      {selectCurrentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
         </div>
@@ -37,6 +41,6 @@ export default connect(({ user: { currentUser }, cart: { hidden } }) => ({
       )}
       <CartIcon />
     </div>
-    {!hidden && <CartDropdown />}
+    {!isCartHidden && <CartDropdown />}
   </div>
 ));

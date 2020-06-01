@@ -1,24 +1,23 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 
-const addItemToCart = (existingCartItems, cartItemToAdd) => {
-  const existingCartItem = existingCartItems.find(
-    (existingCartItem) => existingCartItem.id === cartItemToAdd.id
+const addItemToCart = (cartItems, cartItemToAdd) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToAdd.id
   );
 
-
   if (existingCartItem) {
-    return existingCartItems.map((existingCartItem) =>
-      existingCartItem.id
+    return cartItems.map((cartItem) =>
+      cartItem.id === existingCartItem.id
         ? {
-            ...existingCartItem,
-            quantity: existingCartItem.quantity + 1,
+            ...cartItem,
+            quantity: cartItem.quantity + 1,
           }
-        : existingCartItem
+        : cartItem
     );
   }
 
-  return [{ ...cartItemToAdd, quantity: 1 }, ...existingCartItems];
+  return [{ ...cartItemToAdd, quantity: 1 }, ...cartItems];
 };
 
 export default createStore(

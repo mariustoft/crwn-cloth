@@ -3,21 +3,20 @@ import React from "react";
 import { connect } from "react-redux";
 import "./cart-icon.scss";
 
+import { createStructuredSelector } from "reselect";
 import { selectCartItemsCount } from "../../redux/selectors";
 
 export default connect(
-  (state) => ({
-    nrItems: selectCartItemsCount(state),
-  }),
+  createStructuredSelector({ selectCartItemsCount }),
   (dispatch) => ({
     toggleCartHidden: () =>
       dispatch({
         type: "TOGGLE_CART_HIDDEN",
       }),
   })
-)(({ nrItems, toggleCartHidden }) => (
-  <div className="cart-icon">
-    <ShoppingIcon className="shopping-icon" onClick={toggleCartHidden} />
-    <span className="item-count">{nrItems}</span>
+)(({ selectCartItemsCount, toggleCartHidden }) => (
+  <div className="cart-icon" onClick={toggleCartHidden}>
+    <ShoppingIcon className="shopping-icon" />
+    <span className="item-count">{selectCartItemsCount}</span>
   </div>
 ));
