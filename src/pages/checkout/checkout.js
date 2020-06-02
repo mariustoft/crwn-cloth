@@ -31,7 +31,7 @@ export default connect(
     </div>
  
     {selectCartItems.map((item) => (
-      <CheckoutItem {...item} />
+      <CheckoutItem key={item.id} {...item} />
     ))}
     <span className="total">TOTAL: ${selectCartTotal}</span>
   </div>
