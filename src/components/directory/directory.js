@@ -1,5 +1,4 @@
 import React from "react";
-
 import MenuItem from "../menu-item/menu-item";
 
 import SECTIONS_DATA from "../directory/sections.data";
