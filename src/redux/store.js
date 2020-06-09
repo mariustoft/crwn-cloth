@@ -8,8 +8,23 @@ import logger from "redux-logger";
 
 import { addItemToCart, removeItemFromCart } from "./util";
 
+import DIR_DATA from "./directory.data";
+import COLLECTIONS_DATA from "./collections.data";
+
 // STORE
 const rootReducer = combineReducers({
+  collections: (state = COLLECTIONS_DATA, action) => {
+    switch (action.type) {
+      default:
+        return state;
+    }
+  },
+  directory: (state = DIR_DATA, action) => {
+    switch (action.type) {
+      default:
+        return state;
+    }
+  },
   user: (
     state = {
       currentUser: null,
