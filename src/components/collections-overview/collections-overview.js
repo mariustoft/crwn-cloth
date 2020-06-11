@@ -10,7 +10,7 @@ import { collectionsData } from "../../redux/selectors";
 
 export default connect(createStructuredSelector({ collectionsData }))(
   ({ collectionsData }) => {
- ˝   return (
+    return (
       <div className="collections-overview">
         {Object.values(collectionsData).map(({ ...collection }) => (
           <CollectionPreview key={Math.random()} {...collection} />
