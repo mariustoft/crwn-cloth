@@ -9,11 +9,13 @@ import { createStructuredSelector } from "reselect";
 import { collectionsData } from "../../redux/selectors";
 
 export default connect(createStructuredSelector({ collectionsData }))(
-  ({ collectionsData }) => (
-    <div className="collections-overview">
-      {collectionsData.map(({ ...collection }) => (
-        <CollectionPreview key={collection.id} {...collection} />
-      ))}
-    </div>
-  )
+  ({ collectionsData }) => {
+ ˝   return (
+      <div className="collections-overview">
+        {Object.values(collectionsData).map(({ ...collection }) => (
+          <CollectionPreview key={Math.random()} {...collection} />
+        ))}
+      </div>
+    );
+  }
 );

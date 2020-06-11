@@ -41,21 +41,10 @@ export const collectionsData = createSelector(
 );
 
 // Shop selectors
-const COLLECTION_ID_MAP = {
-  hats: 1,
-  sneakers: 2,
-  jackets: 3,
-  womens: 4,
-  mens: 5,
-};
-
 export const selectCollection = (collectionUrlParam) => {
-  console.log(collectionUrlParam)
+  console.log(collectionUrlParam);
   return createSelector(
     (state) => state.collections,
-    (collections) =>
-      collections.find(
-        (collection) => collection.id === COLLECTION_ID_MAP[collectionUrlParam]
-      )
+    (collections) => collections[collectionUrlParam]
   );
 };

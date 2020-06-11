@@ -13,7 +13,7 @@ console.log(selectCollection)
     <div className="collection-page">
       <h1 className="title">{match.params.collectionID.toUpperCase()}</h1>
       <div className="preview">
-        {selectCollection.items.map((item) => (
+        {selectCollection.items.map((item, index) => (
           <CollectionItem key={item.id} {...item} />
         ))}
       </div>

@@ -13,7 +13,7 @@ import { isCartHidden, selectCurrentUser } from "../../redux/selectors";
 
 import "./header.scss";
 
-export default connect(
+const Header = connect(
   createStructuredSelector({
     selectCurrentUser,
     isCartHidden,
@@ -44,3 +44,5 @@ export default connect(
     {!isCartHidden && <CartDropdown />}
   </div>
 ));
+
+export default Header;
