@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 import "./collection-item.scss";
 
-export default connect(null, (dispatch) => ({
+const CollectionItem = connect(null, (dispatch) => ({
   addItemToCart: (item) =>
     dispatch({
       type: "ADD_ITEM",
@@ -30,3 +30,4 @@ export default connect(null, (dispatch) => ({
     </div>
   </div>
 ));
+export default CollectionItem;

@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 export default withRouter(
   connect(createStructuredSelector({ selectCartItems }))(
     ({ selectCartItems, history, dispatch }) => {
-      console.log("selectCartItems loaded");
       return (
         <div className="cart-dropdown">
           <div className="cart-items">

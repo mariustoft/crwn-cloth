@@ -54,6 +54,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/shop" component={ShopPage} />
+          <Route path="/p/d" component={ShopPage} />
           <Route
             exact
             path="/signin"
@@ -65,6 +66,7 @@ class App extends React.Component {
               )
             }
           />
+          <Route render={() => <h1>404 -- te-ai pierdut?</h1>} />
         </Switch>
       </div>
     );
