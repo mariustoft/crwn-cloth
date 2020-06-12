@@ -86,9 +86,16 @@ export const persistentRootReducer = persistReducer(
   },
   rootReducer
 );
+
+const middlewares = [];
+
+if (process.env.NODE_ENV === "development") {
+  middlewares.push(logger);
+}
+
 export const store = createStore(
   persistentRootReducer,
-  applyMiddleware(...[logger])
+  applyMiddleware(...middlewares)
 );
 
 export const persistor = persistStore(store);
