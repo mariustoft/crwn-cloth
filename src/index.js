@@ -7,7 +7,7 @@ import React from "react";
 
 import { store, persistor } from "./redux/store";
 
-import App from "./app";
+import App from "./App";
 import "./index.scss";
 
 render(

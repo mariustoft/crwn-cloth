@@ -16,7 +16,6 @@
     "redux-persist": "^6.0.0",
     "reselect": "^4.0.0"
   },
-  "engines" : { "node" : "^12" } ,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -37,6 +36,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
+  }
  
 }
