@@ -8,7 +8,6 @@ import CollectionItem from "../../components/collection-item/collection-item";
 import "./collection.scss";
 
 const CollectionPage = ({ selectCollection, match }) => {
-console.log(selectCollection)
   return (
     <div className="collection-page">
       <h1 className="title">{match.params.collectionID.toUpperCase()}</h1>

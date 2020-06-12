@@ -42,7 +42,6 @@ export const collectionsData = createSelector(
 
 // Shop selectors
 export const selectCollection = (collectionUrlParam) => {
-  console.log(collectionUrlParam);
   return createSelector(
     (state) => state.collections,
     (collections) => collections[collectionUrlParam]
