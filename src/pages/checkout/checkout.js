@@ -36,5 +36,10 @@ export default connect(
     ))}
     <span className="total">TOTAL: ${selectCartTotal}</span>
     <StripeCheckoutButton price={selectCartTotal} />
+    <div className='test-warning'>
+      *Please use the folowint testing card to pay*
+      <br />
+      4242 4242 4242 4242 - Exp. 01/23 : CVS-123
+    </div>
   </div>
 ));
